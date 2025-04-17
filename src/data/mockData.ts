@@ -1,4 +1,3 @@
-
 import { User, Violation, Appeal, Report, Zone } from '../types';
 
 // Mock Users
@@ -78,7 +77,7 @@ export const violations: Violation[] = [
 ];
 
 // Mock Appeals
-export const appeals: Appeal[] = [
+export let appeals: Appeal[] = [
   {
     id: 'a1',
     userId: '1',
@@ -151,6 +150,36 @@ export const zones: Zone[] = [
     recommendations: ['Traffic signal optimization', 'Add signboards']
   }
 ];
+
+// Create a new appeal
+export const createAppeal = (appeal: Appeal): Appeal => {
+  appeals.push(appeal);
+  
+  // Update the violation status to appealed
+  const violationIndex = violations.findIndex(v => v.id === appeal.violationId);
+  if (violationIndex !== -1) {
+    violations[violationIndex].status = 'appealed';
+  }
+  
+  return appeal;
+};
+
+// Update an existing appeal
+export const updateAppeal = (appealId: string, updateData: Partial<Appeal>): Appeal | null => {
+  const appealIndex = appeals.findIndex(a => a.id === appealId);
+  
+  if (appealIndex !== -1) {
+    appeals[appealIndex] = { ...appeals[appealIndex], ...updateData };
+    return appeals[appealIndex];
+  }
+  
+  return null;
+};
+
+// Get appeal by ID
+export const getAppealById = (appealId: string): Appeal | undefined => {
+  return appeals.find(a => a.id === appealId);
+};
 
 // Get user violations
 export const getUserViolations = (userId: string): Violation[] => {

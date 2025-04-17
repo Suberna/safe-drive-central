@@ -13,6 +13,8 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Violations from "./pages/Violations";
 import ViolationDetails from "./pages/ViolationDetails";
 import NewAppeal from "./pages/NewAppeal";
+import Appeals from "./pages/Appeals";
+import AppealDetails from "./pages/AppealDetails";
 import ReportViolation from "./pages/ReportViolation";
 import NotFound from "./pages/NotFound";
 
@@ -34,6 +36,8 @@ const App = () => (
               <Route path="/violations" element={<Violations />} />
               <Route path="/violations/:id" element={<ViolationDetails />} />
               <Route path="/appeals/new/:id" element={<NewAppeal />} />
+              <Route path="/appeals" element={<Appeals />} />
+              <Route path="/appeals/:id" element={<AppealDetails />} />
               <Route path="/report" element={<ReportViolation />} />
             </Route>
             <Route path="*" element={<NotFound />} />

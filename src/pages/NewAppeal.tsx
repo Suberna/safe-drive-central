@@ -43,6 +43,13 @@ const NewAppeal = () => {
               description: "This violation has been dismissed and cannot be appealed",
               variant: "destructive",
             });
+          } else if (foundViolation.status === 'paid') {
+            setError('This violation has been paid and cannot be appealed.');
+            toast({
+              title: "Violation paid",
+              description: "This violation has been paid and cannot be appealed",
+              variant: "destructive",
+            });
           } else {
             setViolation(foundViolation);
           }
