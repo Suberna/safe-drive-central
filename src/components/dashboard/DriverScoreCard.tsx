@@ -32,12 +32,16 @@ export const DriverScoreCard = ({ score, className }: DriverScoreCardProps) => {
           <div className="text-sm text-muted-foreground">out of 100</div>
         </div>
 
-        <Progress 
-          value={score} 
-          max={100} 
-          className="h-3 mb-2"
-          indicatorClassName={getScoreColor(score)}
-        />
+        <div className="relative">
+          <Progress 
+            value={score} 
+            className={`h-3 mb-2`}
+          />
+          <div 
+            className={`absolute inset-0 h-3 ${getScoreColor(score)}`}
+            style={{ width: `${score}%` }}
+          />
+        </div>
 
         <div className="text-sm mt-4 font-medium">{getScoreText(score)}</div>
         
