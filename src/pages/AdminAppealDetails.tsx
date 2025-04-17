@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
@@ -56,7 +55,7 @@ export const AdminAppealDetails = () => {
         status: 'pending',
         aiVerdict: 'approved',
         aiReason: 'Based on the evidence provided, the appellant appears to be wearing a helmet that meets safety standards, but was partially obscured in the original violation image.',
-        appealReason: 'I was wearing a helmet at the time of the alleged violation. The image quality is poor and it's difficult to see clearly, but I've attached a clearer image showing I was indeed wearing a helmet.',
+        appealReason: "I was wearing a helmet at the time of the alleged violation. The image quality is poor and it's difficult to see clearly, but I've attached a clearer image showing I was indeed wearing a helmet.",
         evidence: 'https://placehold.co/600x400?text=Appeal+Evidence',
         violationLocation: 'MG Road, Bangalore',
         vehicleNumber: 'KA-01-AB-1234',
