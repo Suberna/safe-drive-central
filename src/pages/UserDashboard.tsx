@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { Violation } from '@/types';
 import { useAuth } from '@/contexts/AuthContext';
 import { getUserViolations } from '@/data/mockData';
+import { ChatBot } from '@/components/chat/ChatBot';
 
 const UserDashboard = () => {
   const { currentUser } = useAuth();
@@ -145,6 +146,9 @@ const UserDashboard = () => {
           </Button>
         </div>
       </div>
+
+      {/* Chat Bot */}
+      <ChatBot />
     </div>
   );
 };

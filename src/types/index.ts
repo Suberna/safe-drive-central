@@ -1,72 +1,47 @@
 
-// User types
 export interface User {
   id: string;
   name: string;
   email: string;
-  licenseNumber: string;
   driverScore: number;
+  licenseNumber: string;
   role: 'user' | 'admin';
+  status?: 'active' | 'warning' | 'suspended';
 }
 
-// Violation types
 export interface Violation {
   id: string;
   userId: string;
-  type: ViolationType;
+  type: string;
+  date: string;
   location: string;
-  datetime: string;
   fine: number;
-  lawReference: string;
+  status: 'pending' | 'paid' | 'appealed' | 'dismissed';
   evidenceUrl: string;
-  status: ViolationStatus;
+  lawReference: string;
 }
 
-export type ViolationType = 
-  | 'no_helmet'
-  | 'triplets'
-  | 'number_plate'
-  | 'illegal_override'
-  | 'no_seat_belt'
-  | 'mobile_usage'
-  | 'wrong_parking'
-  | 'other';
-
-export type ViolationStatus = 
-  | 'pending'
-  | 'paid'
-  | 'appealed'
-  | 'dismissed';
-
-// Appeal types
 export interface Appeal {
   id: string;
-  userId: string;
   violationId: string;
+  userId: string;
   reason: string;
-  aiVerdict: 'accepted' | 'rejected' | 'pending';
-  adminVerdict: 'accepted' | 'rejected' | 'pending';
-  status: 'pending' | 'reviewed';
+  evidenceUrls: string[];
+  status: 'pending' | 'approved' | 'rejected';
+  createdAt: string;
+  aiVerdict?: 'pending' | 'approved' | 'rejected';
+  adminVerdict?: 'approved' | 'rejected';
+  adminComments?: string;
 }
 
-// Report types
 export interface Report {
   id: string;
-  citizenId: string;
-  mediaUrl: string;
-  type: ViolationType;
+  userId: string;
+  type: string;
   location: string;
-  date: string;
+  description: string;
+  evidenceUrls: string[];
   status: 'pending' | 'approved' | 'rejected';
-}
-
-// Zone / Heatmap types
-export interface Zone {
-  id: string;
-  location: {
-    lat: number;
-    lng: number;
-  };
-  violationCount: number;
-  recommendations: string[];
+  createdAt: string;
+  vehicleNumber?: string;
 }

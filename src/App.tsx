@@ -17,6 +17,12 @@ import Appeals from "./pages/Appeals";
 import AppealDetails from "./pages/AppealDetails";
 import ReportViolation from "./pages/ReportViolation";
 import NotFound from "./pages/NotFound";
+import AdminReports from "./pages/AdminReports";
+import AdminUsers from "./pages/AdminUsers";
+import AdminAppeals from "./pages/AdminAppeals";
+import AdminSettings from "./pages/AdminSettings";
+import { AdminAppealDetails } from "./pages/AdminAppealDetails";
+import { AdminReportDetails } from "./pages/AdminReportDetails";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +45,14 @@ const App = () => (
               <Route path="/appeals" element={<Appeals />} />
               <Route path="/appeals/:id" element={<AppealDetails />} />
               <Route path="/report" element={<ReportViolation />} />
+              
+              {/* Admin routes */}
+              <Route path="/admin/reports" element={<AdminReports />} />
+              <Route path="/admin/reports/:id" element={<AdminReportDetails />} />
+              <Route path="/admin/users" element={<AdminUsers />} />
+              <Route path="/admin/appeals" element={<AdminAppeals />} />
+              <Route path="/admin/appeals/:id" element={<AdminAppealDetails />} />
+              <Route path="/admin/settings" element={<AdminSettings />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
