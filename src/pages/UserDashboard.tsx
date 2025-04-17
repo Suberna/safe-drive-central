@@ -11,6 +11,7 @@ import { Violation } from '@/types';
 import { useAuth } from '@/contexts/AuthContext';
 import { getUserViolations } from '@/data/mockData';
 import { ChatBot } from '@/components/chat/ChatBot';
+import { Card } from '@/components/ui/card';
 
 const UserDashboard = () => {
   const { currentUser } = useAuth();
@@ -96,7 +97,11 @@ const UserDashboard = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <div className="lg:col-span-2">
-          <HeatmapPreview />
+          <Card className="p-0 overflow-hidden">
+            <Link to="/traffic-map">
+              <HeatmapPreview />
+            </Link>
+          </Card>
         </div>
         <div>
           <div className="bg-gradient-to-br from-civitrack-blue-50 to-civitrack-blue-100 p-6 rounded-lg h-full flex flex-col">
@@ -135,15 +140,45 @@ const UserDashboard = () => {
         </div>
       </div>
 
-      <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <h3 className="text-lg font-semibold mb-1">Report a Traffic Violation</h3>
-            <p className="text-gray-600">Help make our roads safer by reporting traffic violations you witness.</p>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <div className="lg:col-span-2 bg-gray-50 p-6 rounded-lg border border-gray-100">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div>
+              <h3 className="text-lg font-semibold mb-1">Traffic Fine Calculator</h3>
+              <p className="text-gray-600">Check potential fine amounts for various traffic violations</p>
+            </div>
+            <Button asChild>
+              <Link to="/smart-fines">Calculate Fines</Link>
+            </Button>
           </div>
-          <Button asChild>
-            <Link to="/report">Report Now</Link>
-          </Button>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="bg-white p-4 rounded-md shadow-sm">
+              <p className="font-medium mb-1">No Helmet</p>
+              <p className="text-lg font-bold text-red-600">₹1,000</p>
+              <p className="text-xs text-gray-500">Section 129 MVA</p>
+            </div>
+            <div className="bg-white p-4 rounded-md shadow-sm">
+              <p className="font-medium mb-1">Triple Riding</p>
+              <p className="text-lg font-bold text-red-600">₹1,500</p>
+              <p className="text-xs text-gray-500">Section 128 MVA</p>
+            </div>
+            <div className="bg-white p-4 rounded-md shadow-sm">
+              <p className="font-medium mb-1">Red Light Jump</p>
+              <p className="text-lg font-bold text-red-600">₹2,000</p>
+              <p className="text-xs text-gray-500">Section 119 MVA</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h3 className="text-lg font-semibold mb-1">Report a Violation</h3>
+              <p className="text-gray-600">Help make our roads safer</p>
+            </div>
+            <Button asChild>
+              <Link to="/report">Report Now</Link>
+            </Button>
+          </div>
         </div>
       </div>
 

@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AdminStatsCard } from '@/components/admin/AdminStatsCard';
 import { ViolationsList } from '@/components/dashboard/ViolationsList';
+import { ViolationTrendsChart } from '@/components/admin/ViolationTrendsChart';
+import { TrafficHotspotMap } from '@/components/maps/TrafficHotspotMap';
 import { Link } from 'react-router-dom';
 import { Violation } from '@/types';
 import { useAuth } from '@/contexts/AuthContext';
@@ -89,25 +91,7 @@ const AdminDashboard = () => {
         <TabsContent value="overview">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2">
-              <Card>
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg">Traffic Violation Trends</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="aspect-video bg-gray-100 rounded-md flex items-center justify-center">
-                    <div className="text-center p-6">
-                      <TrendingUp className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                      <h3 className="text-lg font-medium">Violation Analytics</h3>
-                      <p className="text-sm text-muted-foreground mt-2 mb-4">
-                        View comprehensive analytics on traffic violations, patterns, and hotspots.
-                      </p>
-                      <Button asChild>
-                        <Link to="/admin/analytics">View Full Analytics</Link>
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <ViolationTrendsChart />
             </div>
             
             <div>
@@ -141,12 +125,15 @@ const AdminDashboard = () => {
                     </Link>
                   </Button>
                   <Button className="justify-start" variant="outline" asChild>
-                    <Link to="/admin/settings">
+                    <Link to="/admin/smart-fines">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 h-4 w-4">
-                        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
-                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+                        <path d="M13 5v8" />
+                        <path d="M13 17v2" />
+                        <path d="M2 9v6" />
+                        <path d="M22 9v6" />
                       </svg>
-                      System Settings
+                      Manage Fine System
                     </Link>
                   </Button>
                 </CardContent>
@@ -196,68 +183,13 @@ const AdminDashboard = () => {
         </TabsContent>
       </Tabs>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-1 gap-6">
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Violation Hotspots</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="aspect-video bg-gray-100 rounded-md flex items-center justify-center relative">
-              <div className="absolute inset-0 bg-cover bg-center" style={{ 
-                backgroundImage: 'url("https://maps.googleapis.com/maps/api/staticmap?center=28.6139,77.2090&zoom=11&size=600x400&maptype=roadmap&key=DEMO_KEY")',
-                opacity: 0.5
-              }}></div>
-              <div className="absolute inset-0 flex flex-col items-center justify-center backdrop-blur-sm">
-                <Button asChild>
-                  <Link to="/admin/traffic-map">Open Interactive Map</Link>
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg">AI Detection System Status</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center p-3 bg-green-50 rounded-md border border-green-100">
-                <div className="flex items-center">
-                  <div className="h-3 w-3 rounded-full bg-green-500 mr-3 animate-pulse"></div>
-                  <span className="font-medium text-green-700">Helmet Detection</span>
-                </div>
-                <span className="text-sm text-green-600">Active</span>
-              </div>
-              
-              <div className="flex justify-between items-center p-3 bg-green-50 rounded-md border border-green-100">
-                <div className="flex items-center">
-                  <div className="h-3 w-3 rounded-full bg-green-500 mr-3 animate-pulse"></div>
-                  <span className="font-medium text-green-700">Number Plate Detection</span>
-                </div>
-                <span className="text-sm text-green-600">Active</span>
-              </div>
-              
-              <div className="flex justify-between items-center p-3 bg-yellow-50 rounded-md border border-yellow-100">
-                <div className="flex items-center">
-                  <div className="h-3 w-3 rounded-full bg-yellow-500 mr-3 animate-pulse-slow"></div>
-                  <span className="font-medium text-yellow-700">Mobile Usage Detection</span>
-                </div>
-                <span className="text-sm text-yellow-600">Maintenance</span>
-              </div>
-              
-              <div className="flex justify-between items-center p-3 bg-green-50 rounded-md border border-green-100">
-                <div className="flex items-center">
-                  <div className="h-3 w-3 rounded-full bg-green-500 mr-3 animate-pulse"></div>
-                  <span className="font-medium text-green-700">Triple Riding Detection</span>
-                </div>
-                <span className="text-sm text-green-600">Active</span>
-              </div>
-              
-              <Button variant="outline" className="w-full" asChild>
-                <Link to="/admin/ai-system">Manage AI Systems</Link>
-              </Button>
-            </div>
+            <TrafficHotspotMap />
           </CardContent>
         </Card>
       </div>

@@ -23,6 +23,8 @@ import AdminAppeals from "./pages/AdminAppeals";
 import AdminSettings from "./pages/AdminSettings";
 import { AdminAppealDetails } from "./pages/AdminAppealDetails";
 import { AdminReportDetails } from "./pages/AdminReportDetails";
+import TrafficMap from "./pages/TrafficMap";
+import SmartFines from "./pages/SmartFines";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +47,8 @@ const App = () => (
               <Route path="/appeals" element={<Appeals />} />
               <Route path="/appeals/:id" element={<AppealDetails />} />
               <Route path="/report" element={<ReportViolation />} />
+              <Route path="/traffic-map" element={<TrafficMap />} />
+              <Route path="/smart-fines" element={<SmartFines />} />
               
               {/* Admin routes */}
               <Route path="/admin/reports" element={<AdminReports />} />
@@ -53,6 +57,8 @@ const App = () => (
               <Route path="/admin/appeals" element={<AdminAppeals />} />
               <Route path="/admin/appeals/:id" element={<AdminAppealDetails />} />
               <Route path="/admin/settings" element={<AdminSettings />} />
+              <Route path="/admin/traffic-map" element={<TrafficMap />} />
+              <Route path="/admin/smart-fines" element={<SmartFines />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
